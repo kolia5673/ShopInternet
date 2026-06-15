@@ -20,7 +20,7 @@ public class Product
     
     [Required(ErrorMessage = "Вкажіть ціну товару")]
     [DisplayName("Ціна товару")]
-    [Range(typeof(decimal), "0.01", "1000000", ErrorMessage = "Введіть нормальну ціну")]
+    [Range(0.01, 1000000, ErrorMessage = "Введіть нормальну ціну")]
     public decimal Price { get; set; } 
     
     [DisplayName("Зображення товару")]
@@ -31,5 +31,6 @@ public class Product
     public int CategoryId { get; set; }
     
     [ForeignKey("CategoryId")]
+    [DisplayName("Категорія товару")]
     public virtual Category? Category { get; set; }
 }

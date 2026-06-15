@@ -274,3 +274,4 @@ D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\runtimes\win-arm\native
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\runtimes\win-arm64\native\e_sqlite3.dll
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\runtimes\win-x86\native\e_sqlite3.dll
+D:\P42_JS\ASP\ShopInternet\ShopInternet\obj\Debug\net8.0\ShopInternet.sourcelink.json
