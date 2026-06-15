@@ -1,0 +1,35 @@
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ShopInternet.Models;
+
+public class Product
+{
+    [Key]
+    public int Id { get; set; }
+    
+    [Required(ErrorMessage = "Вкажіть назву товару")]
+    [DisplayName("Назва товару")]
+    public string Name { get; set; } = string.Empty;
+    
+    [Required(ErrorMessage = "Вкажіть короткий опис товару")]
+    [DisplayName("Короткий опис товару")]
+    [MaxLength(100, ErrorMessage = "Опис не може бути довшим за 100 символів")]
+    public string Description { get; set; } = string.Empty;
+    
+    [Required(ErrorMessage = "Вкажіть ціну товару")]
+    [DisplayName("Ціна товару")]
+    [Range(typeof(decimal), "0.01", "1000000", ErrorMessage = "Введіть нормальну ціну")]
+    public decimal Price { get; set; } 
+    
+    [DisplayName("Зображення товару")]
+    public string? Image { get; set; }
+    
+    [Required(ErrorMessage = "Оберіть категорію")]
+    [DisplayName("Категорія товару")]
+    public int CategoryId { get; set; }
+    
+    [ForeignKey("CategoryId")]
+    public virtual Category? Category { get; set; }
+}
