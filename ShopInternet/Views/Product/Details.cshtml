@@ -18,7 +18,7 @@
             <div class="col-12 col-lg-4 text-center mb-3">
                 @if (!string.IsNullOrEmpty(Model.Image))
                 {
-                    <img src="@Model.Image" class="img-fluid rounded shadow" style="width: 60%; object-fit: cover;" alt="@Model.Name" />
+                    <img src="@(WC.ImagePath + Model.Image)" class="img-fluid rounded shadow" style="width: 60%; object-fit: cover;" alt="@Model.Name" />
                 }
                 else
                 {

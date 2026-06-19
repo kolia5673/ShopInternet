@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopInternet.Models;
 
@@ -21,6 +22,7 @@ public class Product
     [Required(ErrorMessage = "Вкажіть ціну товару")]
     [DisplayName("Ціна товару")]
     [Range(0.01, 1000000, ErrorMessage = "Введіть нормальну ціну")]
+    [Precision(18, 2)]
     public decimal Price { get; set; } 
     
     [DisplayName("Зображення товару")]

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ShopInternet.Data;
+using ShopInternet.Interfaces;
 using ShopInternet.Models;
 
 namespace ShopInternet.Controllers
@@ -9,10 +10,12 @@ namespace ShopInternet.Controllers
     public class ProductController : Controller
     {
         private readonly ShopDbContext _context;
+        private readonly IUploader _uploader;
 
-        public ProductController(ShopDbContext context)
+        public ProductController(ShopDbContext context, IUploader uploader)
         {
             _context = context;
+            _uploader = uploader;
         }
 
         // GET: Product
@@ -57,6 +60,12 @@ namespace ShopInternet.Controllers
         {
             if (ModelState.IsValid)
             {
+                var files = Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    product.Image = await _uploader.UploadFile(files[0], WC.ImagePath);
+                }
+
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -98,6 +107,26 @@ namespace ShopInternet.Controllers
             {
                 try
                 {
+                    var productDb = await _context.Product.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                    if (productDb == null)
+                    {
+                        return NotFound();
+                    }
+                    var files = Request.Form.Files;
+                    if (files.Count > 0)
+                    {
+                        if (!string.IsNullOrEmpty(productDb.Image))
+                        {
+                            _uploader.DeleteFile(WC.ImagePath, productDb.Image);
+                        }
+                        product.Image = await _uploader.UploadFile(files[0], WC.ImagePath);
+                        
+                    }
+                    else
+                    {
+                        product.Image = productDb.Image;
+                    }
+
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -109,7 +138,7 @@ namespace ShopInternet.Controllers
                     }
                     else
                     {
-                        throw;
+                        throw new HttpRequestException("Bad request something wrong :(");
                     }
                 }
                 return RedirectToAction(nameof(Index));
@@ -146,6 +175,10 @@ namespace ShopInternet.Controllers
             if (product != null)
             {
                 _context.Product.Remove(product);
+                if (!string.IsNullOrEmpty(product.Image))
+                {
+                    _uploader.DeleteFile(WC.ImagePath, product.Image);
+                }
             }
 
             await _context.SaveChangesAsync();

@@ -1,7 +1,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopInternet.Data;
 using ShopInternet.Models;
+using ShopInternet.Models.ViewModels;
 
 namespace ShopInternet.Controllers;
 
@@ -16,9 +18,14 @@ public class HomeController : Controller
         _db = db;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        ProductCategoryVM modelVM = new ProductCategoryVM()
+        {
+            Products = await _db.Product.Include(c => c.Category).ToListAsync(),
+            Categories = await _db.Category.ToListAsync()
+        };
+        return View(modelVM);
     }
 
     public IActionResult Privacy()

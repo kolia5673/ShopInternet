@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using ShopInternet.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using ShopInternet.Interfaces;
+using ShopInternet.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,7 @@ builder.Services.AddSession(Options =>
     Options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddScoped<IUploader, FileUploader>();
 
 var app = builder.Build();
 
