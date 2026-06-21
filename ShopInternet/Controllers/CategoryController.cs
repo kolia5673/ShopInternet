@@ -42,7 +42,11 @@ public class CategoryController : Controller
     public IActionResult Create()
     {
         Category category = new Category();
-        int lstOrder = _db.Category.Max(x => x.Order);
+        int lstOrder = 0;
+        if (_db.Category.Any())
+        {
+            lstOrder = _db.Category.Max(x => x.Order);
+        }
         category.Order = lstOrder + 1;
         return View(category);
     }

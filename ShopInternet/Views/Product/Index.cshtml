@@ -65,7 +65,7 @@
                             @item.Price.ToString("C")
                         </td>
                         <td width="15%">
-                            @Html.DisplayFor(modelItem => item.Category.Name)
+                            @Html.DisplayFor(modelItem => item.Category!.Name)
                         </td>
                         <td class="text-center" style="min-width: 150px;">
                             <div class="w-75 btn-group" role="group">
