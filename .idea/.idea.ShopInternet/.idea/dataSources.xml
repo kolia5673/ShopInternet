@@ -9,13 +9,5 @@
       <jdbc-url>Data Source=ftl.kherson.ua, 1117;Initial Catalog=ShopInternetDb;Persist Security Info=True;User ID=p42;Password=p42;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Microsoft SQL Server (JetBrains) [2]" uuid="18651f39-5293-4595-8383-94d2eef68244">
-      <driver-ref>sqlserver.jb</driver-ref>
-      <synchronize>true</synchronize>
-      <configured-by-url>true</configured-by-url>
-      <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
-      <jdbc-url>Data Source=localhost;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Application Name=&quot;SQL Server Management Studio&quot;;Command Timeout=0</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
   </component>
 </project>

@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 #region MSSQL
-var connectionStr = builder.Configuration.GetConnectionString("localMSSQL") ?? throw new Exception("Connection string not found");
+var connectionStr = builder.Configuration.GetConnectionString("MSSQL") ?? throw new Exception("Connection string not found");
 builder.Services.AddDbContext<ShopDbContext>(options => options.UseSqlServer(connectionStr));
 #endregion
 

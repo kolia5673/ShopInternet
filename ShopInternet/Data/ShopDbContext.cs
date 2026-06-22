@@ -12,4 +12,6 @@ public class ShopDbContext : DbContext
     
     public DbSet<Category> Category { get; set; }
     public DbSet<Product> Product { get; set; }
+    public DbSet<OrderHeader> OrderHeader { get; set; }
+    public DbSet<OrderDetails> OrderDetails { get; set; }
 }

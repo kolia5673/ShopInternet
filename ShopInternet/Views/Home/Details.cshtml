@@ -41,6 +41,24 @@
                             <div class="col-12">
                                 <p class="text-dark"><strong>Категорія: </strong>@(Model.Product.Category?.Name ?? "Без категорії")</p>
                             </div>
+                            <div class="col-12">
+                                <div class="row pt-2">
+                                    <div class="col-4">
+                                        Кількість:
+                                    </div>
+                                    <div class="col-8">
+                                        @if (Model.ExistsInCart)
+                                        {
+                                            <input asp-for="Product.TempCount" class="form-control" readonly />
+                                        }
+                                        else
+                                        {
+                                            <input type="number" asp-for="Product.TempCount" class="form-control" min="1" />
+                                            <span asp-validation-for="Product.TempCount" class="text-danger"></span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row pt-3">
                             <div class="col-12 col-md-6 pb-1">

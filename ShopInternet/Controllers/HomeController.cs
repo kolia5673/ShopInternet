@@ -43,16 +43,23 @@ public class HomeController : Controller
             Product = await _db.Product.Include(c => c.Category).FirstOrDefaultAsync(x => x.Id == id) ?? new Product(),
             ExistsInCart = false
         };
-        if (shoppingCartList.Any(x => x.ProductId == id))
+
+        var itemInCart = shoppingCartList.FirstOrDefault(x => x.ProductId == id);
+        if (itemInCart != null)
         {
             detailsVM.ExistsInCart = true;
+            detailsVM.Product.TempCount = itemInCart.Count;
+        }
+        else
+        {
+            detailsVM.Product.TempCount = 1;
         }
 
         return View(detailsVM);
     }
 
     [HttpPost, ActionName("Details")]
-    public IActionResult DetailsPost(int id)
+    public IActionResult DetailsPost(int id, DetailsVM detailsVM)
     {
         List<ShoppingCart> shoppingCartList = new List<ShoppingCart>();
         var sessionCart = HttpContext.Session.Get<List<ShoppingCart>>(WC.SessionCart);
@@ -60,7 +67,14 @@ public class HomeController : Controller
         {
             shoppingCartList = sessionCart;
         }
-        shoppingCartList.Add(new ShoppingCart {ProductId = id});
+
+        int count = detailsVM.Product.TempCount;
+        if (count < 1)
+        {
+            count = 1;
+        }
+
+        shoppingCartList.Add(new ShoppingCart { ProductId = id, Count = count });
         HttpContext.Session.Set(WC.SessionCart, shoppingCartList);
         return RedirectToAction(nameof(Index));
     }

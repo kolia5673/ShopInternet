@@ -35,4 +35,7 @@ public class Product
     [ForeignKey("CategoryId")]
     [DisplayName("Категорія товару")]
     public virtual Category? Category { get; set; }
+    
+    [NotMapped]
+    public int TempCount { get; set; }
 }
