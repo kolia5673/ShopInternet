@@ -1,4 +1,4 @@
-﻿namespace ShopInternet.Models;
+﻿namespace ShopInternet.DataAccess.Models;
 
 public class ShoppingCart
 {

@@ -1,23 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
-using ShopInternet.Models;
+using ShopInternet.DataAccess.Models;
+using ShopInternet.DataAccess.Repository.IRepository;
 
 namespace ShopInternet.Controllers;
 
 public class CategoryController : Controller
 {
-    private readonly ShopDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CategoryController(ShopDbContext db)
+    public CategoryController(IUnitOfWork unitOfWork)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     // GET: Category
     public async Task<IActionResult> Index()
     {
-        return View(await _db.Category.ToListAsync());
+        return View(await _unitOfWork.Category.GetAllAsync());
     }
 
     // GET: Category/Details/5
@@ -28,8 +28,8 @@ public class CategoryController : Controller
             return NotFound();
         }
 
-        var category = await _db.Category
-            .FirstOrDefaultAsync(m => m.Id == id);
+        var category = await _unitOfWork.Category
+            .GetFirstOrDefaultAsync(m => m.Id == id);
         if (category == null)
         {
             return NotFound();
@@ -39,13 +39,14 @@ public class CategoryController : Controller
     }
 
     // GET: Category/Create
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
         Category category = new Category();
         int lstOrder = 0;
-        if (_db.Category.Any())
+        var categories = await _unitOfWork.Category.GetAllAsync();
+        if (categories.Any())
         {
-            lstOrder = _db.Category.Max(x => x.Order);
+            lstOrder = categories.Max(x => x.Order);
         }
         category.Order = lstOrder + 1;
         return View(category);
@@ -60,8 +61,8 @@ public class CategoryController : Controller
     {
         if (ModelState.IsValid)
         {
-            _db.Add(category);
-            await _db.SaveChangesAsync();
+            await _unitOfWork.Category.AddAsync(category);
+            await _unitOfWork.SaveAsync();
             return RedirectToAction(nameof(Index));
         }
         return View(category);
@@ -75,7 +76,7 @@ public class CategoryController : Controller
             return NotFound();
         }
 
-        var category = await _db.Category.FindAsync(id);
+        var category = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
         if (category == null)
         {
             return NotFound();
@@ -99,12 +100,12 @@ public class CategoryController : Controller
         {
             try
             {
-                _db.Update(category);
-                await _db.SaveChangesAsync();
+                _unitOfWork.Category.Update(category);
+                await _unitOfWork.SaveAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CategoryExists(category.Id))
+                if (!await CategoryExists(category.Id))
                 {
                     return NotFound();
                 }
@@ -126,8 +127,8 @@ public class CategoryController : Controller
             return NotFound();
         }
 
-        var category = await _db.Category
-            .FirstOrDefaultAsync(m => m.Id == id);
+        var category = await _unitOfWork.Category
+            .GetFirstOrDefaultAsync(m => m.Id == id);
         if (category == null)
         {
             return NotFound();
@@ -141,19 +142,19 @@ public class CategoryController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-        var category = await _db.Category.FindAsync(id);
+        var category = await _unitOfWork.Category.GetFirstOrDefaultAsync(u => u.Id == id);
         if (category != null)
         {
-            _db.Category.Remove(category);
+            _unitOfWork.Category.Remove(category);
+            await _unitOfWork.SaveAsync();
         }
 
-        await _db.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
-    private bool CategoryExists(int id)
+    private async Task<bool> CategoryExists(int id)
     {
-        return _db.Category.Any(e => e.Id == id);
+        return await _unitOfWork.Category.GetFirstOrDefaultAsync(e => e.Id == id) != null;
     }
 }
 

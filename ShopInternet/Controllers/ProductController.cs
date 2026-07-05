@@ -1,28 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
+using ShopInternet.DataAccess.Models;
+using ShopInternet.DataAccess.Repository.IRepository;
 using ShopInternet.Interfaces;
-using ShopInternet.Models;
+using ShopInternet.Utility;
 
 namespace ShopInternet.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ShopDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUploader _uploader;
 
-        public ProductController(ShopDbContext context, IUploader uploader)
+        public ProductController(IUnitOfWork unitOfWork, IUploader uploader)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
             _uploader = uploader;
         }
 
         // GET: Product
         public async Task<IActionResult> Index()
         {
-            var shopDbContext = _context.Product.Include(p => p.Category);
-            return View(await shopDbContext.ToListAsync());
+            var products = await _unitOfWork.Product.GetAllAsync(includePropertices: "Category");
+            return View(products);
         }
 
         // GET: Product/Details/5
@@ -33,9 +34,7 @@ namespace ShopInternet.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _unitOfWork.Product.GetFirstOrDefaultAsync(m => m.Id == id, includePropertices: "Category");
             if (product == null)
             {
                 return NotFound();
@@ -45,9 +44,9 @@ namespace ShopInternet.Controllers
         }
 
         // GET: Product/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Category.GetAllAsync(), "Id", "Name");
             return View();
         }
 
@@ -66,11 +65,11 @@ namespace ShopInternet.Controllers
                     product.Image = await _uploader.UploadFile(files[0], WC.ImagePath);
                 }
 
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                await _unitOfWork.Product.AddAsync(product);
+                await _unitOfWork.SaveAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Category.GetAllAsync(), "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -82,12 +81,12 @@ namespace ShopInternet.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
+            var product = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == id);
             if (product == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Category.GetAllAsync(), "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -107,7 +106,7 @@ namespace ShopInternet.Controllers
             {
                 try
                 {
-                    var productDb = await _context.Product.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+                    var productDb = await _unitOfWork.Product.GetFirstOrDefaultAsync(p => p.Id == id, tracked: false);
                     if (productDb == null)
                     {
                         return NotFound();
@@ -127,12 +126,12 @@ namespace ShopInternet.Controllers
                         product.Image = productDb.Image;
                     }
 
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _unitOfWork.Product.Update(product);
+                    await _unitOfWork.SaveAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.Id))
+                    if (!await ProductExists(product.Id))
                     {
                         return NotFound();
                     }
@@ -143,7 +142,7 @@ namespace ShopInternet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Name", product.CategoryId);
+            ViewData["CategoryId"] = new SelectList(await _unitOfWork.Category.GetAllAsync(), "Id", "Name", product.CategoryId);
             return View(product);
         }
 
@@ -155,9 +154,7 @@ namespace ShopInternet.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = await _unitOfWork.Product.GetFirstOrDefaultAsync(m => m.Id == id, includePropertices: "Category");
             if (product == null)
             {
                 return NotFound();
@@ -171,23 +168,23 @@ namespace ShopInternet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Product.FindAsync(id);
+            var product = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == id);
             if (product != null)
             {
-                _context.Product.Remove(product);
+                _unitOfWork.Product.Remove(product);
                 if (!string.IsNullOrEmpty(product.Image))
                 {
                     _uploader.DeleteFile(WC.ImagePath, product.Image);
                 }
+                await _unitOfWork.SaveAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        private async Task<bool> ProductExists(int id)
         {
-            return _context.Product.Any(e => e.Id == id);
+            return await _unitOfWork.Product.GetFirstOrDefaultAsync(e => e.Id == id) != null;
         }
     }
 }

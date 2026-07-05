@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopInternet", "ShopInternet\ShopInternet.csproj", "{F12907AB-9B58-4220-8C0E-A2B3293E6C07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopInternet.DataAccess", "ShopInternet.DataAccess\ShopInternet.DataAccess.csproj", "{4C6EAF68-07E9-42EE-B186-29FB067F1285}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{F12907AB-9B58-4220-8C0E-A2B3293E6C07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F12907AB-9B58-4220-8C0E-A2B3293E6C07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F12907AB-9B58-4220-8C0E-A2B3293E6C07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6EAF68-07E9-42EE-B186-29FB067F1285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6EAF68-07E9-42EE-B186-29FB067F1285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6EAF68-07E9-42EE-B186-29FB067F1285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6EAF68-07E9-42EE-B186-29FB067F1285}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

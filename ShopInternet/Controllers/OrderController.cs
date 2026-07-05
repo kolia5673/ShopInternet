@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
-using ShopInternet.Models;
+using ShopInternet.DataAccess.Models;
+using ShopInternet.DataAccess.Repository.IRepository;
 using ShopInternet.Models.ViewModels;
 using ShopInternet.Utility;
 
@@ -9,13 +9,13 @@ namespace ShopInternet.Controllers;
 
 public class OrderController : Controller
 {
-    private readonly ShopDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
     [BindProperty]
     public ProductUserVM ProductUserVM { get; set; }
     
-    public OrderController(ShopDbContext db)
+    public OrderController(IUnitOfWork unitOfWork)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     // GET
@@ -28,7 +28,7 @@ public class OrderController : Controller
             shoppingCartList = sessionCart;
         }
         List<int> productInCart = shoppingCartList.Select(x => x.ProductId).ToList();
-        IEnumerable<Product> productList = await _db.Product.Where(x => productInCart.Contains(x.Id)).ToListAsync();
+        IEnumerable<Product> productList = await _unitOfWork.Product.GetAllAsync(x => productInCart.Contains(x.Id));
         ProductUserVM = new ProductUserVM()
         {
             OrderHeader = new OrderHeader()
@@ -56,13 +56,13 @@ public class OrderController : Controller
         productUserVm.OrderHeader.OrderDate = DateTime.Now;
         productUserVm.OrderHeader.OrderStatus = WC.StatusInProgress;
         
-        _db.OrderHeader.Add(productUserVm.OrderHeader);
-        await _db.SaveChangesAsync();
+        await _unitOfWork.OrderHeader.AddAsync(productUserVm.OrderHeader);
+        await _unitOfWork.SaveAsync();
 
         decimal orderTotal = 0;
         foreach (var cart in shoppingCartList)
         {
-            Product product = await _db.Product.FindAsync(cart.ProductId);
+            Product product = await _unitOfWork.Product.GetFirstOrDefaultAsync(u => u.Id == cart.ProductId);
             OrderDetails orderDetails = new OrderDetails()
             {
                 OrderHeadId = productUserVm.OrderHeader.Id,
@@ -71,11 +71,11 @@ public class OrderController : Controller
                 Price = product.Price
             };
             orderTotal += cart.Count * product.Price;
-            _db.OrderDetails.Add(orderDetails);
+            await _unitOfWork.OrderDetails.AddAsync(orderDetails);
         }
         
         productUserVm.OrderHeader.OrderTotal = orderTotal;
-        await _db.SaveChangesAsync();
+        await _unitOfWork.SaveAsync();
         
         HttpContext.Session.Clear();
         

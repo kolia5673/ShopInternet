@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Models;
+using ShopInternet.DataAccess.Models;
 
-namespace ShopInternet.Data;
+namespace ShopInternet.DataAccess.Data;
 
 public class ShopDbContext : IdentityDbContext
 {

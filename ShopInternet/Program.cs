@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using ShopInternet.Interfaces;
 using ShopInternet.Utility;
 using Microsoft.AspNetCore.Identity;
 using ShopInternet;
+using ShopInternet.DataAccess.Data;
+using ShopInternet.DataAccess.Repository;
+using ShopInternet.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +60,9 @@ builder.Services.AddSession(Options =>
     Options.Cookie.IsEssential = true;
 });
 
+#region Repository
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+#endregion
 builder.Services.AddScoped<IUploader, FileUploader>();
 builder.Services.AddHttpContextAccessor();
 

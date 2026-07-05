@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace ShopInternet.Models;
+namespace ShopInternet.DataAccess.Models;
 
 public class Product
 {

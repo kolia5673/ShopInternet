@@ -1,18 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
-using ShopInternet.Models;
+using ShopInternet.DataAccess.Data;
+using ShopInternet.DataAccess.Models;
+using ShopInternet.DataAccess.Repository.IRepository;
 using ShopInternet.Utility;
 
 namespace ShopInternet.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ShopDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CartController(ShopDbContext db)
+        public CartController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         
         // GET: CartController
@@ -26,7 +27,7 @@ namespace ShopInternet.Controllers
             }
 
             List<int> productInCart = shoppingCartList.Select(x => x.ProductId).ToList();
-            IEnumerable<Product> productList = await _db.Product.Include(x => x.Category).Where(x => productInCart.Contains(x.Id)).ToListAsync();
+            IEnumerable<Product> productList = await _unitOfWork.Product.GetAllAsync(x => productInCart.Contains(x.Id), includePropertices:"Category");
 
             foreach (var product in productList)
             {

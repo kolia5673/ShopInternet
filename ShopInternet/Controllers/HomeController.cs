@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
-using ShopInternet.Models;
+using ShopInternet.DataAccess.Models;
+using ShopInternet.DataAccess.Repository.IRepository;
 using ShopInternet.Models.ViewModels;
 using ShopInternet.Utility;
 
@@ -11,20 +11,20 @@ namespace ShopInternet.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-    private readonly ShopDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public HomeController(ILogger<HomeController> logger, ShopDbContext db)
+    public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
     {
         _logger = logger;
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<IActionResult> Index()
     {
         ProductCategoryVM modelVM = new ProductCategoryVM()
         {
-            Products = await _db.Product.Include(c => c.Category).ToListAsync(),
-            Categories = await _db.Category.ToListAsync()
+            Products = await _unitOfWork.Product.GetAllAsync(includePropertices: "Category"),
+            Categories = await _unitOfWork.Category.GetAllAsync()
         };
         return View(modelVM);
     }
@@ -40,7 +40,7 @@ public class HomeController : Controller
 
         DetailsVM detailsVM = new DetailsVM()
         {
-            Product = await _db.Product.Include(c => c.Category).FirstOrDefaultAsync(x => x.Id == id) ?? new Product(),
+            Product = await _unitOfWork.Product.GetFirstOrDefaultAsync(x => x.Id == id, includePropertices: "Category") ?? new Product(),
             ExistsInCart = false
         };
 

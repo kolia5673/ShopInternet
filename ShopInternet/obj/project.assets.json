@@ -2860,6 +2860,20 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "ShopInternet.DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.28",
+          "Microsoft.EntityFrameworkCore": "8.0.28"
+        },
+        "compile": {
+          "bin/placeholder/ShopInternet.DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ShopInternet.DataAccess.dll": {}
+        }
       }
     }
   },
@@ -7824,6 +7838,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "ShopInternet.DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../ShopInternet.DataAccess/ShopInternet.DataAccess.csproj",
+      "msbuildProject": "../ShopInternet.DataAccess/ShopInternet.DataAccess.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7833,7 +7852,8 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.28",
       "Microsoft.EntityFrameworkCore.Sqlite >= 8.0.28",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.28",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.23"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.23",
+      "ShopInternet.DataAccess >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7867,7 +7887,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj": {
+              "projectPath": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

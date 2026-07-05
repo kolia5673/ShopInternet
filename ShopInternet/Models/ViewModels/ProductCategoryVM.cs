@@ -1,4 +1,6 @@
-﻿namespace ShopInternet.Models.ViewModels;
+﻿using ShopInternet.DataAccess.Models;
+
+namespace ShopInternet.Models.ViewModels;
 
 public class ProductCategoryVM
 {

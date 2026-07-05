@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ShopInternet.Models;
+namespace ShopInternet.DataAccess.Models;
 
 public class OrderHeader
 {

@@ -280,3 +280,5 @@ D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.AspNetCore.Cr
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\ShopInternet.DataAccess.dll
+D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\ShopInternet.DataAccess.pdb

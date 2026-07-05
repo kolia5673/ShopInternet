@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopInternet.Data;
+using ShopInternet.DataAccess.Repository.IRepository;
 using ShopInternet.Helpers;
 
 namespace ShopInternet.Controllers;
@@ -11,13 +11,13 @@ namespace ShopInternet.Controllers;
 [ApiController]
 public class ProductApiController : Controller
 {
-    private readonly ShopDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly ILogger<ProductApiController> _logger;
 
-    public ProductApiController(ShopDbContext db, UserManager<IdentityUser> userManager, ILogger<ProductApiController> logger)
+    public ProductApiController(IUnitOfWork unitOfWork, UserManager<IdentityUser> userManager, ILogger<ProductApiController> logger)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
         _userManager = userManager;
         _logger = logger;
     }
@@ -40,31 +40,33 @@ public class ProductApiController : Controller
     public async Task<IActionResult> GetAll(string apiKey, string? productName = null, string? categoryName = null)
     {
         if (!await IsValidKey(apiKey)) return Unauthorized("Invalid API key");
-        var query = _db.Product.Include(p => p.Category).AsQueryable();
+        
+        var products = await _unitOfWork.Product.GetAllAsync(includePropertices: "Category");
 
         if (!string.IsNullOrEmpty(productName))
         {
-            query = query.Where(p => p.Name.Contains(productName));
+            products = products.Where(p => p.Name.Contains(productName));
         }
         if (!string.IsNullOrEmpty(categoryName))
         {
-            query = query.Where(p => p.Category.Name.Contains(categoryName));
+            products = products.Where(p => p.Category.Name.Contains(categoryName));
         }
 
-        var products = await query.ToListAsync();
-        AppHelper.ConverImagePathToURL(products, Request);
-        return Ok(products);
+        var productList = products.ToList();
+        AppHelper.ConverImagePathToURL(productList, Request);
+        return Ok(productList);
     }
 
     [HttpGet("category/{id:int}")]
     public async Task<IActionResult> GetCategoryById(int id, string apiKey)
     {
         if(!await IsValidKey(apiKey)) return Unauthorized("Invalid API key");
-        var category = await _db.Category.FirstOrDefaultAsync(c => c.Id == id);
+        var category = await _unitOfWork.Category.GetFirstOrDefaultAsync(c => c.Id == id);
         if (category == null) return NotFound();
-        var products = await _db.Product.Where(x => x.CategoryId == id).ToListAsync();
-        AppHelper.ConverImagePathToURL(products, Request);
-        return Ok(products);
+        var products = await _unitOfWork.Product.GetAllAsync(x => x.CategoryId == id);
+        var productList = products.ToList();
+        AppHelper.ConverImagePathToURL(productList, Request);
+        return Ok(productList);
     }
 
 }

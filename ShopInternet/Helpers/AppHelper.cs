@@ -1,4 +1,5 @@
-﻿using ShopInternet.Models;
+﻿using ShopInternet.DataAccess.Models;
+using ShopInternet.Models;
 
 namespace ShopInternet.Helpers;
 
