@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "ShopInternet/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Google": "8.0.28",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.28",
           "Microsoft.EntityFrameworkCore": "8.0.28",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.28",
@@ -592,6 +593,14 @@
         "resources": {
           "lib/net6.0/zh-Hant/Humanizer.resources.dll": {
             "locale": "zh-Hant"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/8.0.28": {
+        "runtime": {
+          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "8.0.28.0",
+            "fileVersion": "8.0.2826.26913"
           }
         }
       },
@@ -2435,6 +2444,13 @@
       "sha512": "sha512-VIXB7HCUC34OoaGnO3HJVtSv2/wljPhjV7eKH4+TFPgQdJj2lvHNKY41Dtg0Bphu7X5UaXFR4zrYYyo+GNOjbA==",
       "path": "humanizer.core.zh-hant/2.14.1",
       "hashPath": "humanizer.core.zh-hant.2.14.1.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/8.0.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-E4LIr9Gvk09jZjH5BC9OoOhtN36/rQjSBCCKB4Bwmh3cxOLprCp659J97hZ1CyoctMHB+HgXyJv8ZWWKFmIjyA==",
+      "path": "microsoft.aspnetcore.authentication.google/8.0.28",
+      "hashPath": "microsoft.aspnetcore.authentication.google.8.0.28.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/8.0.28": {
       "type": "package",

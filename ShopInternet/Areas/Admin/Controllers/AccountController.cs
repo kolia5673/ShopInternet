@@ -1,4 +1,7 @@
 ﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +20,84 @@ namespace ShopInternet.Areas.Admin.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
+        }
+
+        //Goggle Auth
+        //Обробка кнопки "Зайти з Google"
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult LoginWithGoogle()
+        {
+            var redirectUrl = Url.Action("GoogleResponse", "Account", new { area = "Admin" });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(GoogleDefaults.AuthenticationScheme, redirectUrl);
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        //Google перенаправить після підтвердження
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if(info == null)
+            {
+                return RedirectToAction("LoginFailure", "Account", new { area = "Admin" });
+            }
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor:true);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Profile", "Account", new { area = "Admin" });
+            }
+
+            if (result.IsLockedOut)
+            {
+                return RedirectToAction("LoginFailure", "Account", new { area = "Admin" });
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue((ClaimTypes.Email));
+                if (string.IsNullOrEmpty(email))
+                {
+                    return RedirectToAction("LoginFailure", "Account", new { area = "Admin" });
+                }
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null)
+                {
+                    user = new IdentityUser { UserName = email, Email = email };
+                    var createResult = await _userManager.CreateAsync(user);
+                    if (!createResult.Succeeded)
+                    {
+                        return RedirectToAction("LoginFailure", "Account", new { area = "Admin" });
+                    }
+                }
+                var addLoginResult = await _userManager.AddLoginAsync(user, info);
+                if (addLoginResult.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, WC.CustomerRole);
+                    await _signInManager.SignInAsync(user, isPersistent:false);
+                    return RedirectToAction("Profile", "Account", new { area = "Admin" });
+                }
+                return RedirectToAction("LoginFailure", "Account", new { area = "Admin" });
+            }
+        }
+
+        
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult LoginFailure()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            if(User.Identity?.IsAuthenticated != true)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Admin" });
+            }
+
+            return View(User.Claims);
         }
 
         [HttpGet]
@@ -68,7 +149,7 @@ namespace ShopInternet.Areas.Admin.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Користувач");
+                    await _userManager.AddToRoleAsync(user, WC.CustomerRole);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home", new { area =""});
                 }
@@ -111,5 +192,6 @@ namespace ShopInternet.Areas.Admin.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home", new { area = "" });
         }
+
     }
 }

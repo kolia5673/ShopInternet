@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "8klAcwgAAiXWn57UGB6L1UciOkUnFNuml1km2KdWCN0=",
+  "Hash": "lbCx4zr5BKECcXAtDtMw3gLUt6H8UE5ofZyD9QZ11vk=",
   "Source": "ShopInternet",
   "BasePath": "_content/ShopInternet",
   "Mode": "Default",
@@ -167,6 +167,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\products\\1c050248-4644-4ff8-b53c-167ccf12fa3e.jfif"
+    },
+    {
+      "Identity": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\images\\products\\250978fc-ff16-4148-bd78-cbe08090bf39.jfif",
+      "SourceId": "ShopInternet",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\",
+      "BasePath": "_content/ShopInternet",
+      "RelativePath": "images/products/250978fc-ff16-4148-bd78-cbe08090bf39.jfif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\products\\250978fc-ff16-4148-bd78-cbe08090bf39.jfif"
     },
     {
       "Identity": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\images\\products\\2553e262-7823-46ca-a65f-4d52675f1c02.jfif",

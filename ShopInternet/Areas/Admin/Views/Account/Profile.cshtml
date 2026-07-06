@@ -1,0 +1,59 @@
+﻿@using System.Security.Claims
+@model IEnumerable<System.Security.Claims.Claim>
+
+@{
+    ViewData["Title"] = "Профіль Google";
+    var name = Model.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+    var email = Model.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+    var picture = Model.FirstOrDefault(c => c.Type == "picture")?.Value;
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-7">
+        <div class="card shadow border-0 rounded-3">
+            <div class="card-body p-4 text-center">
+                <!-- Перевірка та показ аватарки -->
+                @if (!string.IsNullOrEmpty(picture))
+                {
+                    <img src="@picture" alt="Аватар" class="rounded-circle mb-3 shadow-sm" width="90" height="90" />
+                }
+                else
+                {
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 fw-bold" style="width: 90px; height: 90px; font-size: 2rem;">
+                        @(name?[0].ToString().ToUpper() ?? "U")
+                    </div>
+                }
+
+                <h3 class="fw-bold m-0">@name</h3>
+                <p class="text-muted mb-4">@email</p>
+
+                <hr />
+
+                <h5 class="text-start mb-3 fw-bold">Дані токена (Claims):</h5>
+                <div class="table-responsive text-start">
+                    <table class="table table-hover align-middle card-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Тип Клейму</th>
+                                <th>Значення</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var claim in Model)
+                            {
+                                <tr>
+                                    <td class="small text-muted text-truncate" style="max-width: 180px;">@claim.Type</td>
+                                    <td class="small fw-semibold text-break">@claim.Value</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <form asp-area="Admin" asp-action="Logout" asp-controller="Account" method="post" class="mt-4">
+                    <button type="submit" class="btn btn-danger px-4">Вийти з облікового запису</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -66,6 +66,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUploader, FileUploader>();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddGoogleAuth(builder.Configuration);
+
 var app = builder.Build();
 
 #region Create Roles

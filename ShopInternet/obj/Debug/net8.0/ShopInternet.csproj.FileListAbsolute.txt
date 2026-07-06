@@ -282,3 +282,4 @@ D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.Extensions.Id
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\ShopInternet.DataAccess.dll
 D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\ShopInternet.DataAccess.pdb
+D:\P42_JS\ASP\ShopInternet\ShopInternet\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
