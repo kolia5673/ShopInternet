@@ -1,0 +1,13 @@
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\bin\Debug\net8.0\ShopInternet.DataAccess.deps.json
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\bin\Debug\net8.0\ShopInternet.DataAccess.dll
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\bin\Debug\net8.0\ShopInternet.DataAccess.pdb
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.csproj.AssemblyReference.cache
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.AssemblyInfoInputs.cache
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.AssemblyInfo.cs
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.csproj.CoreCompileInputs.cache
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.sourcelink.json
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.dll
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\refint\ShopInternet.DataAccess.dll
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ShopInternet.DataAccess.pdb
+D:\P42_JS\ASP\ShopInternet\ShopInternet.DataAccess\obj\Debug\net8.0\ref\ShopInternet.DataAccess.dll

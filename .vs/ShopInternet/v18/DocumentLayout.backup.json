@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\P42_JS\\ASP\\ShopInternet\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F12907AB-9B58-4220-8C0E-A2B3293E6C07}|ShopInternet\\ShopInternet.csproj|d:\\p42_js\\asp\\shopinternet\\shopinternet\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F12907AB-9B58-4220-8C0E-A2B3293E6C07}|ShopInternet\\ShopInternet.csproj|solutionrelative:shopinternet\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F12907AB-9B58-4220-8C0E-A2B3293E6C07}|ShopInternet\\ShopInternet.csproj|d:\\p42_js\\asp\\shopinternet\\shopinternet\\wwwroot\\js\\ckeditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{F12907AB-9B58-4220-8C0E-A2B3293E6C07}|ShopInternet\\ShopInternet.csproj|solutionrelative:shopinternet\\wwwroot\\js\\ckeditor.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ckeditor.js",
+              "DocumentMoniker": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\js\\ckeditor.js",
+              "RelativeDocumentMoniker": "ShopInternet\\wwwroot\\js\\ckeditor.js",
+              "ToolTip": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\js\\ckeditor.js",
+              "RelativeToolTip": "ShopInternet\\wwwroot\\js\\ckeditor.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2026-07-12T08:07:52.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "ShopInternet\\Controllers\\ProductController.cs",
+              "ToolTip": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "ShopInternet\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAswN0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-29T17:01:33.964Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
