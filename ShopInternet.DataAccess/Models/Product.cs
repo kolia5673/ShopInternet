@@ -16,7 +16,7 @@ public class Product
     
     [Required(ErrorMessage = "Вкажіть короткий опис товару")]
     [DisplayName("Короткий опис товару")]
-    [MaxLength(100, ErrorMessage = "Опис не може бути довшим за 100 символів")]
+    [MaxLength(500, ErrorMessage = "Опис не може бути довшим за 100 символів")]
     public string Description { get; set; } = string.Empty;
     
     [Required(ErrorMessage = "Вкажіть ціну товару")]

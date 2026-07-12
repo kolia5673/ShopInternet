@@ -59,7 +59,9 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td width="30%">
-                            @Html.DisplayFor(modelItem => item.Description)
+                            <div style="max-height: 100px; overflow: hidden; text-overflow: ellipsis;">
+                                @Html.Raw(item.Description)
+                            </div>
                         </td>
                         <td width="15%">
                             @item.Price.ToString("C")

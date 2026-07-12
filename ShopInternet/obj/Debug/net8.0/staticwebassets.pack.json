@@ -121,6 +121,10 @@
       "PackagePath": "staticwebassets\\images\\products\\ffd13478-0bc9-495f-a570-12605417117a.jfif"
     },
     {
+      "Id": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\js\\ckeditor.js",
+      "PackagePath": "staticwebassets\\js\\ckeditor.js"
+    },
+    {
       "Id": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

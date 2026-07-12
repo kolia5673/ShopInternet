@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Build.Experimental.ProjectCache;
 using Microsoft.EntityFrameworkCore;
 using ShopInternet.DataAccess.Models;
 using ShopInternet.DataAccess.Repository.IRepository;
@@ -185,6 +186,52 @@ namespace ShopInternet.Controllers
         private async Task<bool> ProductExists(int id)
         {
             return await _unitOfWork.Product.GetFirstOrDefaultAsync(e => e.Id == id) != null;
+        }
+
+        //POST: Product/UploadImageForCKEditor
+        [HttpPost]
+        public async Task<IActionResult> UploadImageForCKEditor()
+        {
+            try
+            {
+                var files = Request.Form.Files;
+                if (files.Count == 0)
+                {
+                    return Json(new { error = new { message = "Файл не був завантажений" } });
+                }
+                var file = files[0];
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+                if(!allowedExtensions.Contains(fileExtension))
+                {
+                    return Json(new { error = new { message = "Неприпустимий тип файлу \".jpg\", \".jpeg\", \".png\", \".gif\", \".webp\"" } });
+                }
+                if(file.Length > 5*1024*1024)
+                {
+                    return Json(new { error = new { message = "Файл занадто великий. Максимальний розмір: 5 MB" } });
+                }
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "ckeditor");
+                if(!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+                string uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                { 
+                    await file.CopyToAsync(fileStream);
+                }
+                string fileUrl = $"/images/ckeditor/{uniqueFileName}";
+                return Json(new
+                {
+                    url = fileUrl,
+                    uploaded = true
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = new { message = $"Помилка при завантаженні зображення: {ex.Message}" } });
+            }
         }
     }
 }
