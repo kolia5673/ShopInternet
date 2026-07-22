@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj": {}
+    "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj": {}
   },
   "projects": {
-    "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj": {
+    "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj",
         "projectName": "ShopInternet.DataAccess",
-        "projectPath": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\vetal\\.nuget\\packages\\",
-        "outputPath": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\kudra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\vetal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kudra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -78,20 +78,20 @@
         }
       }
     },
-    "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj": {
+    "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj",
+        "projectUniqueName": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj",
         "projectName": "ShopInternet",
-        "projectPath": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj",
-        "packagesPath": "C:\\Users\\vetal\\.nuget\\packages\\",
-        "outputPath": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet\\obj\\",
+        "projectPath": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet\\ShopInternet.csproj",
+        "packagesPath": "C:\\Users\\kudra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\vetal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kudra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -106,8 +106,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj": {
-                "projectPath": "D:\\P42_JS\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj"
+              "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\kudra\\ASP\\ShopInternet\\ShopInternet.DataAccess\\ShopInternet.DataAccess.csproj"
               }
             }
           }
