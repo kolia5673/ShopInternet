@@ -19,7 +19,7 @@
         </div>
         <div class="mb-3">
             <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" id="Description"  class="ckeditor form-control" rows="3"></textarea>
+            <textarea asp-for="Description" id="Description" class="ckeditor form-control" rows="3"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
@@ -52,10 +52,13 @@
 </form>
 
 @section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-        <script src="~/js/ckeditor.js" asp-append-version="true"></script>
-    }
-    
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 }
-
